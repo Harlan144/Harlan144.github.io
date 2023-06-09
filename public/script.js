@@ -18,7 +18,7 @@ let config = {
     COLORFUL: true,
     COLOR_UPDATE_SPEED: 3,
     PAUSED: false,
-    BACK_COLOR: { r: 5, g: 5, b: 5 },
+    BACK_COLOR: { r: 0, g: 0, b: 0 },
     TRANSPARENT: false,
     BLOOM: true,
     BLOOM_ITERATIONS: 8,
@@ -324,7 +324,6 @@ const clearShader = compileShader(gl.FRAGMENT_SHADER, `
 
 const colorShader = compileShader(gl.FRAGMENT_SHADER, `
     precision mediump float;
-
     uniform vec4 color;
 
     void main () {
@@ -980,8 +979,6 @@ function calcDeltaTime () {
 }
 
 function resizeCanvas () {
-    console.log(canvas.clientHeight);
-    console.log(canvas.clientWidth);
     let width = scaleByPixelRatio(canvas.clientWidth);
     let height = scaleByPixelRatio(canvas.clientHeight);
     //let width = scaleByPixelRatio(500);

@@ -1,5 +1,5 @@
 body {
-    background: white;
+    background: black;
     color: white;
     text-align: center;
     margin: 0;
@@ -26,7 +26,12 @@ body {
 
 #homepagehero_container {
     pointer-events: none;
-    position: relative;
+    top:30%;
+    left:50%;
+    position: absolute;
+    width:100%;
+    transform: translate(-50%, -50%);
+
 }
 
 header {
@@ -94,6 +99,28 @@ a {
     text-align: center;
 }
 
+#container {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+#c-container {
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#c2-container{
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    top: 60%;
+    left: 0;
+}
+
 .nav {
     margin: 15px auto 0;
     position: relative;
@@ -154,7 +181,7 @@ a:nth-child(2):hover~.animation {
     background-color: #e74c3c;
 }
 
-.nav .start-portefolio,
+.nav .start-portfolio,
 a:nth-child(3):hover~.animation {
     width: 160px;
     left: 210px;
@@ -241,7 +268,7 @@ a:nth-child(4):hover~.animation {
 
     .mobile_nav {
         display: block;
-        top: 15%;
+        top: 10%;
         left: 50%;
         transform: translate(-50%, -50%);
 
