@@ -4,15 +4,15 @@ canvas.height = canvas.clientHeight;
 var ctx = canvas.getContext('2d');
 var count = canvas.height;
 var bubbles = [];
-var bubbleCount = 30;
-var bubbleSpeed = 2;
+var bubbleCount = 20;
+var bubbleSpeed = 1;
 var popLines = 6;
 var popDistance = 60;
 var mouseOffset = {
     x: 0,
     y: 0
 }
-
+var clumsyFingerOffset = 1.5 //extra space around bubble where still popped
 
 
 // --------------
@@ -56,8 +56,8 @@ function animate() {
     // ---------------
 
     for (var i = 0; i < bubbles.length; i++) {
-        if (mouseOffset.x > bubbles[i].position.x - bubbles[i].radius && mouseOffset.x < bubbles[i].position.x + bubbles[i].radius) {
-            if (mouseOffset.y > bubbles[i].position.y - bubbles[i].radius && mouseOffset.y < bubbles[i].position.y + bubbles[i].radius) {
+        if (mouseOffset.x > bubbles[i].position.x - bubbles[i].radius*clumsyFingerOffset && mouseOffset.x < bubbles[i].position.x + bubbles[i].radius*clumsyFingerOffset) {
+            if (mouseOffset.y > bubbles[i].position.y - bubbles[i].radius*clumsyFingerOffset && mouseOffset.y < bubbles[i].position.y + bubbles[i].radius*clumsyFingerOffset) {
                 for (var a = 0; a < bubbles[i].lines.length; a++) {
                     popDistance = bubbles[i].radius * 0.5;
                     bubbles[i].lines[a].popping = true;
@@ -80,12 +80,12 @@ window.requestAnimationFrame(animate);
 
 var createBubble = function () {
     this.position = { x: 0, y: 0 };
-    this.radius = 8 + Math.random() * 6;
+    this.radius = 10 + Math.random() * 8;
     this.xOff = Math.random() * canvas.width - this.radius;
     this.yOff = Math.random() * canvas.height;
     this.distanceBetweenWaves = 50 + Math.random() * 40;
     this.count = canvas.height + this.yOff;
-    this.color = '#8bc9ee';
+    this.color = '#1abc9c';
     this.lines = [];
     this.popping = false;
     this.maxRotation = 85;
@@ -133,7 +133,7 @@ var createBubble = function () {
 
         if (!this.popping) {
             ctx.beginPath();
-            ctx.strokeStyle = '#8bc9ee';
+            ctx.strokeStyle = '#1abc9c';
             ctx.lineWidth = 1;
             ctx.arc(0, 0, this.radius - 3, 0, Math.PI * 1.5, true);
             ctx.stroke();
@@ -149,7 +149,7 @@ var createBubble = function () {
         for (var a = 0; a < this.lines.length; a++) {
             if (this.lines[a].popping) {
                 if (this.lines[a].lineLength < popDistance && !this.lines[a].inversePop) {
-                    this.lines[a].popDistance += 0.06;
+                    this.lines[a].popDistance += 0.10;
                 } else {
                     if (this.lines[a].popDistance >= 0) {
                         this.lines[a].inversePop = true;
