@@ -243,10 +243,18 @@ function createLine() {
 
 canvas.addEventListener('mousemove', mouseMove);
 
+canvas.addEventListener('mouseclick', mouseClick);
+
 function mouseMove(e) {
     mouseOffset.x = e.offsetX;
     mouseOffset.y = e.offsetY;
 }
+
+function mouseClick(e) {
+    mouseOffset.x = e.offsetX;
+    mouseOffset.y = e.offsetY;
+}
+
 
 window.addEventListener('resize', function () {
     canvas.width = canvas.clientWidth;
