@@ -52,7 +52,6 @@ $(window).bind('load', function () {
         canvas2;
 
     c.width = $('#c-container').outerWidth();
-    console.log(c.width);
     c.height = $('#c-container').outerHeight();
 
     c2.width = $('#c2-container').outerWidth();
