@@ -173,7 +173,7 @@ $(window).bind('load', function () {
 
     $(window).resize(function initial() {
         window.addEventListener('mousemove', app.cursorEvents, false);
-        window.addEventListener('mouseover', app.cursorEvents, false);
+        window.addEventListener('touchmove', app.cursorEvents, false);
 
         c.width = $('#c-container').outerWidth();
         c.height = $('#c-container').outerHeight();
