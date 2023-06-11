@@ -1,41 +1,27 @@
 // the main sketch/canvas/context
-// using sketch.js for this, learn more: https://soulwire.github.com/sketch.js/
 var sketch = Sketch.create(),
     
-    // keep track of the profit
-    profit = 0,
-    
-    // jQuery convenience to change profit display
-    profitDisplay = $( '.profit span' ),
-    
     // set the magnet range in pixels
-    magnetRange = 250,
+    magnetRange = 200,
     
     // initial color
     hue = 60,
     
     // delta time for speed regulation
     dt = 1,
-    
+
+    maxCoins= 750,
     // the coin object collection
-    coins = [],
+    coins = [];
     
-    // number format with commas utility
-    // source - https://bit.ly/14ckxAw
-    numberWithCommas = function( x ){
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    };
 
 // set mouse coords to center by default
 sketch.mouse.x = sketch.width / 2;
 sketch.mouse.y = sketch.height / 2;
 
-// set font settings
-sketch.font = 'bold 14px arial';
-sketch.textAlign = 'center';
 
 // coin constructor
-var Coin = function( x, y, value ){
+var Coin = function( x, y ){
   // position
   this.x = x;
 	this.y = y;
@@ -45,10 +31,8 @@ var Coin = function( x, y, value ){
 	this.vy = random( -50, 100 ) / 100;
   
   // size of the coin
-	this.radius = 4;
+	this.radius = random(4,6);
   
-  // how many space bucks is this worth?
-	this.value = value;
   
   // is the coin in the magnet's (cursor) range?
 	this.magnetized = false;
@@ -122,18 +106,16 @@ Coin.prototype = {
 			// collect the coin if within magnet collection threshold
 			if( dist <= 15 ){
         // add to our profit
-				profit += this.value;
 				this.collected = true;
 				this.magnetized = false;
-        profitDisplay.text( numberWithCommas( profit ) );
 			};				
 		
     // coin has been collected, send it to infinity and beyond
     } else {
       // fade out number
-      this.alpha -= 0.03;
+      this.alpha -= 0.02;
       // move up
-      this.cv += 0.15;			
+      this.cv += 0.10;			
 			this.y -= this.cv * dt;
     };
     
@@ -169,10 +151,8 @@ Coin.prototype = {
 		  sketch.restore();
     // else render the value number
     } else {
-      sketch.fillStyle = 'hsla(0, 0%, 0%, ' + ((this.alpha < 0 ) ? 0 : this.alpha) + ')';
-      sketch.fillText( '+' + this.value, this.x, this.y + 1 );
       sketch.fillStyle = 'hsla(' + hue + ', 100%, 60%, ' + ((this.alpha < 0 ) ? 0 : this.alpha) + ')';
-      sketch.fillText( '+' + this.value, this.x, this.y );
+      sketch.fillText( '+', this.x, this.y );
     };
 	}
 };
@@ -180,8 +160,13 @@ Coin.prototype = {
 // create a coin every 50 milliseconds
 setInterval(function(){
   // the settings passed place it randomly and give the coin a random value
-  coins.push( new Coin( random( 0, sketch.width ), random( 0, sketch.height ), floor( random( 1, 100 ) ) ) );
-}, 50 );
+  console.log(coins.length);
+  if (coins.length<maxCoins){
+    coins.push( new Coin( random( 0, sketch.width ), random( 0, sketch.height )));
+
+  }
+
+}, 30 );
 
 sketch.update = function(){
   // convert sketch.js to more usable number
@@ -208,143 +193,3 @@ sketch.draw = function(){
 sketch.clear = function(){
   sketch.clearRect( 0, 0, sketch.width, sketch.height );
 };
-
-// Or, without comments
-/*
-var sketch = Sketch.create(),
-    profit = 0,
-    profitDisplay = $( '.profit span' ),
-    magnetRange = 250,
-    hue = 60,
-    dt = 1,
-    coins = [],    
-    numberWithCommas = function( x ){
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
-
-sketch.mouse.x = sketch.width / 2;
-sketch.mouse.y = sketch.height / 2;
-sketch.font = 'bold 14px arial';
-sketch.textAlign = 'center';
-
-var Coin = function( x, y, value ){
-  this.x = x;
-	this.y = y;
-	this.vx = random( -50, 100 ) / 100;
-	this.vy = random( -50, 100 ) / 100;
-	this.radius = 4;
-	this.value = value;
-	this.magnetized = false;
-	this.xScale = 1;
-	this.xScaleGrow = true;
-	this.collected = false;
-	this.alpha = 0;
-  this.cv = 0;
-};
-
-Coin.prototype = {
-  update: function( i ){
-		if( this.alpha < 1 && !this.collected ){
-			this.alpha += 0.05;
-		};
-			
-		if( this.xScaleGrow && this.xScale >= 1 ){
-			this.xScaleGrow = false;
-		} else if( !this.xScaleGrow && this.xScale <= .1 ){
-			this.xScaleGrow = true;
-		};
-		
-    var scaleChange = ( this.magnetized ) ? 0.15 : 0.05;
-    
-		if( this.xScaleGrow ){        
-      this.xScale += scaleChange;
-		} else {
-		  this.xScale -= scaleChange;
-		};
-			
-		if( !this.collected ){
-		  var dx = sketch.mouse.x - this.x;
-			var dy = sketch.mouse.y - this.y;
-			var dist = sqrt( dx * dx + dy * dy );
-			if( dist <= magnetRange ){
-				this.magnetized = true;
-				var angle = atan2( dy, dx );
-				var mvx = cos( angle );
-				var mvy = sin( angle );
-        var power = 3 + ( 100 / dist );
-				this.x += ( mvx * power ) * dt;
-				this.y += ( mvy * power ) * dt; 
-			} else {
-				this.magnetized = false;
-				this.x += this.vx * dt;
-				this.y += this.vy * dt;
-			};
-			 
-			if( dist <= 15 ){
-				profit += this.value;
-				this.collected = true;
-				this.magnetized = false;
-        profitDisplay.text( numberWithCommas( profit ) );
-			};				
-		
-    } else {
-      this.alpha -= 0.03;
-      this.cv += 0.15;			
-			this.y -= this.cv * dt;
-    };
-    
-    if( this.outOfBounds() ){
-			coins.splice( i, 1 );          
-		};
-	},
-  outOfBounds: function(){
-    // compare x and y to see if in bound or not
-    return ( this.x > sketch.width + this.radius || this.x < -this.radius || this.y > sketch.height + this.radius || this.y < -this.radius );
-  },
-	render: function(){
-    if(!this.collected){
-		  sketch.save();
-		  sketch.translate( this.x, this.y );
-		  sketch.scale( this.xScale, 1 )
-		  sketch.beginPath();
-		  sketch.arc( 0, 0, ( this.radius < 0 ) ? 0 : this.radius, 0, TWO_PI, false );
-      if(this.magnetized){
-        sketch.fillStyle = 'hsla(0, 0%, ' + ( this.xScale * 140 ) + '%, ' + this.alpha + ')';
-      } else {
-        sketch.fillStyle = 'hsla(' + hue + ', 100%, ' + ( this.xScale * 70 ) + '%, ' + this.alpha + ')';
-      };
-		  sketch.fill();
-		  sketch.restore();
-    } else {
-      sketch.fillStyle = 'hsla(0, 0%, 0%, ' + ((this.alpha < 0 ) ? 0 : this.alpha) + ')';
-      sketch.fillText( '+' + this.value, this.x, this.y + 1 );
-      sketch.fillStyle = 'hsla(' + hue + ', 100%, 60%, ' + ((this.alpha < 0 ) ? 0 : this.alpha) + ')';
-      sketch.fillText( '+' + this.value, this.x, this.y );
-    };
-	}
-};
-
-setInterval(function(){
-  coins.push( new Coin( random( 0, sketch.width ), random( 0, sketch.height ), floor( random( 1, 100 ) ) ) );
-}, 50 );
-
-sketch.update = function(){
-  dt = sketch.dt / 16;
-  hue += 0.75;
-  var i = coins.length;
-  while( i-- ){
-    coins[ i ].update( i );  
-  };
-};
-
-sketch.draw = function(){
-  var i = coins.length;
-  while( i-- ){
-    coins[ i ].render();  
-  };
-};
-
-sketch.clear = function(){
-  sketch.clearRect( 0, 0, sketch.width, sketch.height );
-};
-*/
