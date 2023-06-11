@@ -246,6 +246,7 @@ canvas.addEventListener('mousemove', mouseMove);
 canvas.addEventListener('mouseclick', mouseClick);
 
 function mouseMove(e) {
+    e.preventDefault();
     mouseOffset.x = e.offsetX;
     mouseOffset.y = e.offsetY;
 }
