@@ -15,7 +15,7 @@ body {
     left: 0;
 }
 
-#canvas, canvas {
+#canvas, .sketch {
     position: absolute;
     top: 0;
     left: 0;
