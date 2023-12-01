@@ -25,11 +25,12 @@ body {
 }
 
 #homepagehero_container {
-    pointer-events: none;
+    /* pointer-events: none; */
     top:30%;
     left:50%;
     position: absolute;
     width:100%;
+    max-width: 800px;
     transform: translate(-50%, -50%);
 
 }
