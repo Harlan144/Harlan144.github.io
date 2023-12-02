@@ -10,43 +10,257 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <body>
+  <canvas id="canvas_explode"></canvas>
 
-  <div>
-    <div id="homepagehero_container">
-      <h1>
-        Click here for my GitHub
-      </h1>
-      <h3>
-        Or if you'd rather, scroll down to see summaries of my most recent projects.
+  <div id="portfolio_hero_container">
+
+    <h1>
+      Explore My Projects
+    </h1>
+    <h2>
+      Listed below are my Recent Publications and pet projects
+    </h2>
+    <p>
+      Check out my GitHub for more code or take a look at my CV
+    </p>
+    <div class="flexbox">
+      <a href="https://github.com/harlan144" aria-label="GitHub" target=”_blank” class="fa fa-github override_pointer"
+        target="_blank" id="github_fa"></a>
+
+      <a href="../assets/harlan_stevens_CV.pdf" class="override_pointer" download="Harlan_Stevens_CV.pdf"
+        target="_blank">
+        <div id="CV" class="override_pointer">
+          <h3>CV</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div id="pubs" class="pubs_flexbox">
+    <div class="paper_wrapper">
+      <div class="paper">
+        <a href="https://www.biorxiv.org/content/10.1101/2023.11.29.569308v1" target="_blank">
+          <img src="../assets/colorblindness.png" alt="Colorblindness manuscript first page" class="paper_img">
+        </a>
+      </div>
+    </div>
+    <div class="paper_info">
+      <h2 class="title">Identifying images in the biology literature that are problematic for people with a color-vision
+        deficiency</h2>
+      <br>
+
+
+      <h3><em>Nov 29, 2023</em> (<a class="a_color" target="_blank"
+          href="https://bioapps.byu.edu/colorblind_image_tester">bioapps.byu.edu/colorblind_image_tester</a>)</h3>
+
+      <p>For this paper, I worked under Dr. Piccolo to determine how often scientific images are colorblind-friendly and create
+        tools to improve accessibility in biological literature. I helped annotate 6,000 images from the eLife
+        journal.
+        I then used this dataset to train a convolutional neural network to accurately predict whether images are
+        colorblind-friendly or not.
+        I created a <a href="https://bioapps.byu.edu/colorblind_image_tester" class="a_color"
+          target="_blank">website</a> using Node.js
+        to deploy the
+        model and allow users to test images.
+      </p>
+
+
+      <h3><em><u>Stevens HP</u>, Winegar CV, Oakley AF, Piccolo SR.</em> <a
+          href="https://www.biorxiv.org/content/10.1101/2023.11.29.569308v1" class="a_color" target="_blank">
+          Identifying images in the biology literature that are problematic for people with a color-vision deficiency.
+        </a>
+        <em>BioRxiv. 2023 Nov 29. DOI: 10.1101/2023.11.29.569308.</em> [Preprint, Submitted for review].
       </h3>
     </div>
-    
-    <div class="nav">
-      <a href="../">Home</a>
-      <a href="./about.html">About</a>
-      <a href="#">Portfolio</a>
-      <a href="./contact.html">Contact</a>
-      <div class="animation start-portfolio"></div>
+
+    <div class="pub_padding"> </div>
+
+
+    <div class="paper_wrapper">
+      <div class="paper">
+        <a href="https://chemrxiv.org/engage/chemrxiv/article-details/652438e9bda59ceb9a30feef" target="_blank">
+          <img src="../assets/tepid.png" alt="TEPid machine learning paper" class="paper_img">
+        </a>
+      </div>
     </div>
-    <div class="mobile_nav">
-      <input id="menu-toggle" type="checkbox" />
-      <label class='menu-button-container' for="menu-toggle">
-        <div class='menu-button'></div>
-      </label>
-      <ul class="menu animation">
-        <li><a href="../">Home</a></li>
-        <li><a href="./about.html">About</a></li>
-        <li><a href="#">Portfolio</a></li>
-        <li><a href="./contact.html">Contact</a></li>
-      </ul>
+
+    <div class="paper_info">
+      <h2 class="title">Tolman Electronic Parameter Predictions from a Machine Learning Model Provide Insight into
+        Phosphine Ligand
+        Electronic Effects
+      </h2>
+      <h3><em>Oct 10, 2023</em> (<a class="a_color" target="_blank"
+          href="https://tepid.chem.byu.edu/">tepid.chem.byu.edu</a>)</h3>
+
+      <p>For this paper, I worked under Dr. Ess to optimize a machine-learning model that predicts Tolman Electronic
+        Parameters -- a measure of a ligand's electron withdrawing capacity.
+        Along with this, I developed a <a href="https://tepid.chem.byu.edu/" class="a_color" target="_blank">website</a>
+        to deploy the model, generated a new database of phosphines, and authored
+        and edited the manuscript.
+      </p>
+
+
+      <h3><em><u>Stevens HP</u>, Olsen J, Kirkland JK, Ess DH.</em> <a
+          href="https://chemrxiv.org/engage/chemrxiv/article-details/652438e9bda59ceb9a30feef" class="a_color"
+          target="_blank">
+          Tolman Electronic Parameter Predictions from a Machine Learning Model Provide Insight into Phosphine Ligand
+          Electronic Effects.</a>
+        <em>ChemRxiv. 2023 Oct 10. DOI: 10.26434/chemrxiv-2023-wjnpj.</em> [Preprint, Submitted for review].
+      </h3>
     </div>
-    
+
+    <div class="pub_padding"> </div>
+
+
+    <div class="paper_wrapper">
+      <div class="paper">
+        <a href="https://pubmed.ncbi.nlm.nih.gov/37762379/" target="_blank">
+          <img src="../assets/short_seq_aligner.png" alt="Short Sequence Aligner Paper" class="paper_img">
+        </a>
+      </div>
+    </div>
+
+    <div class="paper_info">
+      <h2 class="title">Short Sequence Aligner Benchmarking for Chromatin Research</h2>
+
+      <h3><em>Sep 14, 2023</em></h3>
+
+      <p>I worked with PhD candidate John Carter to benchmark different aligner algorithms used in
+        chromatin research.
+        My main responsibility was to write custom Python scripts that analyze how frequently aligner algorithms fail to map
+        reads to their biological
+        locations and determine the impact of this on downstream analysis for chromatin structure experiments (ie, ATAC-seq, CHiP-Seq, and MNase-seq experiments).</p>
+
+
+      <h3><em>Carter JC, <u>Stevens H</u>, Ridge PG, Johnson SM.</em> <a
+          href="https://pubmed.ncbi.nlm.nih.gov/37762379/" class="a_color" target="_blank">
+          Short Sequence Aligner Benchmarking for Chromatin Research.
+        </a>
+        <em>International Journal of Molecular Sciences. 2023 Sep 14. DOI: 10.3390/ijms241814074.</em>
+      </h3>
+    </div>
+
+    <div class="pub_padding"> </div>
+
+
+    <div class="paper_wrapper">
+      <div class="paper">
+        <a href="https://pubmed.ncbi.nlm.nih.gov/37697225/" target="_blank">
+          <img src="../assets/flu_vaccine.png" alt="Flu vaccine paper" class="paper_img">
+        </a>
+      </div>
+    </div>
+
+    <div class="paper_info">
+      <h2 class="title">Changes in Attitudes and Barriers to Seasonal Influenza Vaccination from 2007 to 2023</h2>
+
+      <h3><em>Sep 11, 2023</em></h3>
+
+      <p>This study investigated how factors and barriers to flu vaccination among college students have changed over
+        the past 16 years.
+        My main role was to clean and analyze survey data using Pandas and R. Among our findings, we noted that the
+        Covid-19 pandemic
+        has changed vaccine attitudes, and vaccine fatigue has been a large contributor. Additionally, political
+        affiliation has become a predictor of flu vaccine uptake.
+      </p>
+
+      <h3><em>Skyles TJ, <u>Stevens HP</u>, Obray AM, Jensen JL, Miner DS, Bodily RJ, Nielson BU, Poole BD.</em> <a
+          href="https://pubmed.ncbi.nlm.nih.gov/37697225/" class="a_color" target="_blank">
+          Changes in Attitudes and Barriers to Seasonal Influenza Vaccination from 2007 to 2023.
+        </a>
+        <em>Journal of Community Health. 2023 Sep 11. DOI: 10.1007/s10900-023-01277-7.</em>
+      </h3>
+    </div>
+
+    <div class="pub_padding"> </div>
+
+    <div class="paper_wrapper">
+      <div class="presentation">
+        <a href="https://our.utah.edu/ucur/genetic-modification-of-nmad-1-demethylase-in-c-elegans-to-affect-longevity/"
+          target="_blank">
+          <img src="../assets/nmad-1_poster.png" alt="NMAD-1 Presentation" class="presentation_img">
+        </a>
+      </div>
+    </div>
+
+    <div class="paper_info">
+      <h2 class="title">Genetic Modification of NMAD-1 Demethylase in <em>C. elegans</em> to Affect Longevity</h2>
+
+      <p>We are investigating the impact of <em>nmad-1</em> (a DNA m6dA demethylase) on aging in <em>C. elegans</em> (a nematode worm). We used RNAi to knockdown <em>nmad-1</em> expression, and we are working on overexpressing it through microinjection.
+        We hope that our research will link m6dA-methylaton to longevity and eventually lead to novel, epigenetic therapeutics.
+      </p>
+
+      <h3><em><u>Harlan Stevens</u>, John Carter, Steven Johnson.</em> <a
+          href="https://our.utah.edu/ucur/genetic-modification-of-nmad-1-demethylase-in-c-elegans-to-affect-longevity/"
+          class="a_color" target="_blank">
+          Genetic Modification of NMAD-1 Demethylase in <em>C. elegans</em> to Affect Longevity.</a> 
+        <em>Utah Conference of Undergraduate Research. Feb 2023.</em>
+      </h3>
+    </div>
+
+    <div class="pub_padding"> </div>
+
+    <div class="paper_wrapper">
+      <div class="presentation">
+        <a href="http://harlanstevens144.pythonanywhere.com/"
+          target="_blank">
+          <img src="../assets/scripture_website.png" alt="NMAD-1 Presentation" class="presentation_img">
+        </a>
+      </div>
+    </div>
+
+    <div class="paper_info">
+      <h2 class="title">Searching the Scriptures Based on Semantic Similarity</h2>
+
+      <p>As a pet project with some friends, I used a machine-learning-based approach to find semantic similarities between scriptural texts.
+        We fine-tuned a transformer-based model on scriptural texts and calculated the cosine-similarity between all verses to find novel insights into what scriptures are similar.
+        I made this tool into a <a href="http://harlanstevens144.pythonanywhere.com/" class="a_color">website</a>, where users can upload verses and the NLP model returns the five most semantically similar verses.
+        We hope this work will help facilitate dialogue between religious groups and enhance scripture study.
+        More progress on this is forthcoming!
+      </p>
+
+      <!-- <h3><em><u>Harlan Stevens</u>, John Carter, Steven Johnson.</em> <a
+          href="https://our.utah.edu/ucur/genetic-modification-of-nmad-1-demethylase-in-c-elegans-to-affect-longevity/"
+          class="a_color" target="_blank">
+          Genetic Modification of NMAD-1 Demethylase in <em>C. elegans</em> to Affect Longevity.</a> 
+        <em>Utah Conference of Undergraduate Research. Feb 2023.</em>
+      </h3> -->
+    </div>
+
+    <div class="pub_padding"> </div>
+
+    <div id="comingSoon">
+      <h2>More projects are coming soon!</h2>
+      <h3>If you have any suggestions for fun side-projects (epigenetics, machine-learning, or web development), <a href="./contact.html" class="a_color">let me know!</a></h3>
+    </div>
   </div>
 
-  <div class="background-effect-container">
-    <script src="https://rawgithub.com/soulwire/sketch.js/master/js/sketch.min.js"></script>
-    <script src="/public/script_magnet.js"></script>
+
+  <div class="nav">
+    <a href="../">Home</a>
+    <a href="./about.html">About</a>
+    <a href="#">Portfolio</a>
+    <a href="./contact.html">Contact</a>
+    <div class="animation start-portfolio"></div>
   </div>
+  <div class="mobile_nav">
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+    <ul class="menu animation">
+      <li><a href="../">Home</a></li>
+      <li><a href="./about.html">About</a></li>
+      <li><a href="#">Portfolio</a></li>
+      <li><a href="./contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/1.0.0/anime.min.js"></script>
+  <script src="/public/script_explosions.js"></script>
 
 
 </body>
