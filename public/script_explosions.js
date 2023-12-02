@@ -159,7 +159,8 @@ var animate = anime({
 });
 
 var resizeCanvas = function() {
-  cW = document.body.scrollWidth; //window.innerWidth;
+  cW = window.innerWidth; //document.body.scrollWidth; //
+  console.log(cW);
   cH =  1000; //document.getElementById("pubs").offsetHeight+window.innerHeight*0.6;  //document.body.scrollHeight; //window.innerHeight;
   console.log(cH);
   c.width = cW * devicePixelRatio;
