@@ -35,7 +35,7 @@ function calcPageFillRadius(x, y) {
 
 function addClickListeners() {
   document.addEventListener("touchstart", handleEvent);
-  document.addEventListener("mousedown", handleEvent);
+  // document.addEventListener("mousedown", handleEvent);
   document.addEventListener("pointerdown", handleEvent,{ passive: false });
 
 };
@@ -188,14 +188,15 @@ function handleInactiveUser() {
   
   function clearInactiveTimeout() {
     clearTimeout(inactive);
-    document.removeEventListener("mousedown", clearInactiveTimeout);
+    // document.removeEventListener("mousedown", clearInactiveTimeout);
     document.removeEventListener("touchstart", clearInactiveTimeout);
     document.removeEventListener("pointerdown", clearInactiveTimeout);
 
   }
-  document.addEventListener("mousedown", clearInactiveTimeout);
+
+  // document.addEventListener("mousedown", clearInactiveTimeout);
   document.addEventListener("touchstart", clearInactiveTimeout);
-  document.addEventListener("pointerdown", clearInactiveTimeout);
+  document.addEventListener("pointerdown", clearInactiveTimeout,{ passive: false });
 
 }
 
