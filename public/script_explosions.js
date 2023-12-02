@@ -36,7 +36,7 @@ function calcPageFillRadius(x, y) {
 function addClickListeners() {
   document.addEventListener("touchstart", handleEvent);
   // document.addEventListener("mousedown", handleEvent);
-  document.addEventListener("pointerdown", handleEvent,{ passive: false });
+  // document.addEventListener("pointerdown", handleEvent,{ passive: false });
 
 };
 
@@ -158,9 +158,8 @@ var animate = anime({
 });
 
 var resizeCanvas = function() {
-  cW = document.body.scrollWidth; //window.innerWidth;
+  cW = window.innerWidth; //document.body.scrollWidth;
   cH =  document.getElementById("pubs").offsetHeight+window.innerHeight*0.6;  //document.body.scrollHeight; //window.innerHeight;
-  console.log(document.body.scrollHeight);
   c.width = cW * devicePixelRatio;
   c.height = cH * devicePixelRatio;
   ctx.scale(devicePixelRatio, devicePixelRatio);
@@ -190,13 +189,13 @@ function handleInactiveUser() {
     clearTimeout(inactive);
     // document.removeEventListener("mousedown", clearInactiveTimeout);
     document.removeEventListener("touchstart", clearInactiveTimeout);
-    document.removeEventListener("pointerdown", clearInactiveTimeout);
+    // document.removeEventListener("pointerdown", clearInactiveTimeout);
 
   }
 
   // document.addEventListener("mousedown", clearInactiveTimeout);
   document.addEventListener("touchstart", clearInactiveTimeout);
-  document.addEventListener("pointerdown", clearInactiveTimeout,{ passive: false });
+  // document.addEventListener("pointerdown", clearInactiveTimeout,{ passive: false });
 
 }
 
