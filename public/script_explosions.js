@@ -39,80 +39,172 @@ function addClickListeners() {
 
 };
 
+// function handleEvent(e) {
+//     if (e.touches) { 
+//       e.preventDefault();
+      
+//       e = e.touches[0];
+      
+//     }
+//     var currentColor = colorPicker.current();
+//     var nextColor = colorPicker.next();
+//     var targetR = calcPageFillRadius(e.pageX, e.pageY);
+//     var rippleSize = Math.min(200, (cW * .4));
+//     var minCoverDuration = 750;
+    
+//     var pageFill = new Circle({
+//       x: e.pageX,
+//       y: e.pageY,
+//       r: 0,
+//       fill: nextColor
+//     });
+//     var fillAnimation = anime({
+//       targets: pageFill,
+//       r: targetR,
+//       duration:  Math.max(targetR / 2 , minCoverDuration ),
+//       easing: "easeOutQuart",
+//       complete: function(){
+//         bgColor = pageFill.fill;
+//         removeAnimation(fillAnimation);
+//       }
+//     });
+    
+//     var ripple = new Circle({
+//       x: e.pageX,
+//       y: e.pageY,
+//       r: 0,
+//       fill: currentColor,
+//       stroke: {
+//         width: 3,
+//         color: currentColor
+//       },
+//       opacity: 1
+//     });
+//     var rippleAnimation = anime({
+//       targets: ripple,
+//       r: rippleSize,
+//       opacity: 0,
+//       easing: "easeOutExpo",
+//       duration: 900,
+//       complete: removeAnimation
+//     });
+    
+//     var particles = [];
+//     for (var i=0; i<32; i++) {
+//       var particle = new Circle({
+//         x: e.pageX,
+//         y: e.pageY,
+//         fill: currentColor,
+//         r: anime.random(24, 48)
+//       })
+//       particles.push(particle);
+//     }
+//     var particlesAnimation = anime({
+//       targets: particles,
+//       x: function(particle){
+//         return particle.x + anime.random(rippleSize, -rippleSize);
+//       },
+//       y: function(particle){
+//         return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
+//       },
+//       r: 0,
+//       easing: "easeOutExpo",
+//       duration: anime.random(1000,1300),
+//       complete: removeAnimation
+//     });
+//     animations.push(fillAnimation, rippleAnimation, particlesAnimation);
+// }
+
+
 function handleEvent(e) {
-    if (e.touches) { 
-      e.preventDefault();
-      
-      e = e.touches[0];
-      
-    }
-    var currentColor = colorPicker.current();
-    var nextColor = colorPicker.next();
-    var targetR = calcPageFillRadius(e.pageX, e.pageY);
-    var rippleSize = Math.min(200, (cW * .4));
-    var minCoverDuration = 750;
-    
-    var pageFill = new Circle({
-      x: e.pageX,
-      y: e.pageY,
-      r: 0,
-      fill: nextColor
-    });
-    var fillAnimation = anime({
-      targets: pageFill,
-      r: targetR,
-      duration:  Math.max(targetR / 2 , minCoverDuration ),
-      easing: "easeOutQuart",
-      complete: function(){
-        bgColor = pageFill.fill;
-        removeAnimation(fillAnimation);
-      }
-    });
-    
-    var ripple = new Circle({
-      x: e.pageX,
-      y: e.pageY,
-      r: 0,
+  if (e.touches) {
+    e.preventDefault();
+    e = e.touches[0];
+  }
+
+  var rect = c.getBoundingClientRect();
+  var offsetX = e.clientX - rect.left;
+  var offsetY = e.clientY - rect.top;
+
+  var targetElement = document.elementFromPoint(e.clientX, e.clientY);
+
+  // Trigger the click event on the target element
+  if (targetElement) {
+    var clickEvent = new MouseEvent('click', { bubbles: true });
+    targetElement.dispatchEvent(clickEvent);
+  }
+  
+  var currentColor = colorPicker.current();
+  var nextColor = colorPicker.next();
+  var targetR = calcPageFillRadius(offsetX, offsetY);
+  var rippleSize = Math.min(200, cW * 0.4);
+  var minCoverDuration = 750;
+
+  var pageFill = new Circle({
+    x: offsetX,
+    y: offsetY,
+    r: 0,
+    fill: nextColor,
+  });
+
+  var fillAnimation = anime({
+    targets: pageFill,
+    r: targetR,
+    duration: Math.max(targetR / 2, minCoverDuration),
+    easing: "easeOutQuart",
+    complete: function () {
+      bgColor = pageFill.fill;
+      removeAnimation(fillAnimation);
+    },
+  });
+
+  var ripple = new Circle({
+    x: offsetX,
+    y: offsetY,
+    r: 0,
+    fill: currentColor,
+    stroke: {
+      width: 3,
+      color: currentColor,
+    },
+    opacity: 1,
+  });
+
+  var rippleAnimation = anime({
+    targets: ripple,
+    r: rippleSize,
+    opacity: 0,
+    easing: "easeOutExpo",
+    duration: 900,
+    complete: removeAnimation,
+  });
+
+  var particles = [];
+  for (var i = 0; i < 32; i++) {
+    var particle = new Circle({
+      x: offsetX,
+      y: offsetY,
       fill: currentColor,
-      stroke: {
-        width: 3,
-        color: currentColor
-      },
-      opacity: 1
+      r: anime.random(24, 48),
     });
-    var rippleAnimation = anime({
-      targets: ripple,
-      r: rippleSize,
-      opacity: 0,
-      easing: "easeOutExpo",
-      duration: 900,
-      complete: removeAnimation
-    });
-    
-    var particles = [];
-    for (var i=0; i<32; i++) {
-      var particle = new Circle({
-        x: e.pageX,
-        y: e.pageY,
-        fill: currentColor,
-        r: anime.random(24, 48)
-      })
-      particles.push(particle);
-    }
-    var particlesAnimation = anime({
-      targets: particles,
-      x: function(particle){
-        return particle.x + anime.random(rippleSize, -rippleSize);
-      },
-      y: function(particle){
-        return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
-      },
-      r: 0,
-      easing: "easeOutExpo",
-      duration: anime.random(1000,1300),
-      complete: removeAnimation
-    });
-    animations.push(fillAnimation, rippleAnimation, particlesAnimation);
+    particles.push(particle);
+  }
+
+  var particlesAnimation = anime({
+    targets: particles,
+    x: function (particle) {
+      return particle.x + anime.random(rippleSize, -rippleSize);
+    },
+    y: function (particle) {
+      return particle.y + anime.random(rippleSize * 1.15, -rippleSize * 1.15);
+    },
+    r: 0,
+    easing: "easeOutExpo",
+    duration: anime.random(1000, 1300),
+    complete: removeAnimation,
+  });
+
+  animations.push(fillAnimation, rippleAnimation, particlesAnimation);
 }
 
 function extend(a, b){
@@ -158,11 +250,18 @@ var animate = anime({
   }
 });
 
-var resizeCanvas = function() {
-  cW = window.innerWidth; //document.body.scrollWidth; //
-  console.log(cW);
-  cH =  1000; //document.getElementById("pubs").offsetHeight+window.innerHeight*0.6;  //document.body.scrollHeight; //window.innerHeight;
-  console.log(cH);
+// var resizeCanvas = function() {
+//   cW = window.innerWidth;
+//   cH =  window.innerHeight;//document.getElementById("pubs").offsetHeight+window.innerHeight*0.6;  //document.body.scrollHeight; //window.innerHeight;
+//   console.log(document.body.scrollHeight);
+//   c.width = cW * devicePixelRatio;
+//   c.height = cH * devicePixelRatio;
+//   ctx.scale(devicePixelRatio, devicePixelRatio);
+// };
+
+var resizeCanvas = function () {
+  cW = c.offsetWidth;
+  cH = c.offsetHeight;
   c.width = cW * devicePixelRatio;
   c.height = cH * devicePixelRatio;
   ctx.scale(devicePixelRatio, devicePixelRatio);
