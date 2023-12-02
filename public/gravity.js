@@ -15,7 +15,7 @@ var world;
 var iterations = 1;
 
 var walls = [];
-var wall_thickness = 200;
+var wall_thickness = 800;
 var wallsSetted = false;
 
 var mouseJoint;
@@ -84,8 +84,8 @@ function init() {
   // init box2d
 
   worldAABB = new b2AABB();
-  worldAABB.minVertex.Set(-200, -200);
-  worldAABB.maxVertex.Set(window.innerWidth + 200, window.innerHeight + 200);
+  worldAABB.minVertex.Set(-100, -100);
+  worldAABB.maxVertex.Set(window.innerWidth + 100, window.innerHeight + 100);
 
   world = new b2World(worldAABB, new b2Vec2(0, 0), true);
 
@@ -213,150 +213,10 @@ function onElementClick(event) {
     event.preventDefault();
   }
 
-  // if ( event.target == document.getElementById( 'btnG' ) ) search();
-  // if ( event.target == document.getElementById( 'btnI' ) ) imFeelingLucky();
   if (event.target == document.getElementById("q"))
     document.getElementById("q").focus();
 }
 
-// API STUFF
-
-/*
-			function search() {
-
-				if ( !isRunning ) {
-
-					run();
-
-				}
-
-				if ( query == document.getElementById('q').value ) {
-
-					page ++;
-
-					gWebSearch.gotoPage( page );
-					gImageSearch.gotoPage( page );
-
-				} else {
-
-					page = 0;
-
-					query = document.getElementById('q').value;
-
-					gWebSearch.execute( query );
-					gImageSearch.execute( query );
-
-				}
-
-				return false;
-
-			}
-
-			function imFeelingLucky() {
-
-				imFeelingLuckyMode = true;
-				gWebSearch.execute( document.getElementById('q').value );
-
-				return false;
-
-			}
-
-			function onWebSearch() {
-
-				if ( imFeelingLuckyMode ) {
-
-					location.href = gWebSearch.results[0].unescapedUrl;
-					return;
-
-				}
-
-				for ( var i = 0; i < gWebSearch.results.length; i ++ ) {
-
-					addWeb( gWebSearch.results[i] );
-
-				}
-
-			}
-
-			function onImageSearch() {
-
-				for ( var i = 0; i < gImageSearch.results.length; i ++ ) {
-
-					addImage( gImageSearch.results[i] );
-
-				}
-
-			}
-
-			function addWeb( data ) {
-
-				var element = document.createElement('div');
-				element.innerHTML = '<div class="result"><div class="title"><a href="' + data.unescapedUrl + '" target="_blank">' + data.title + '</a></div><div class="url">' + data.visibleUrl + '</div><div class="content">' + data.content + '</div>';
-
-				document.body.appendChild( element );
-
-				properties.push( [ Math.random() * ( window.innerWidth / 2 ), - 200, 546, element.offsetHeight ] );
-
-				var i = properties.length - 1;
-
-				element.style.position = 'absolute';
-				element.style.left = 0 + 'px';
-				element.style.top = - 100 + 'px';
-				element.style.backgroundColor = '#ffffff';
-				element.addEventListener( 'mousedown', onElementMouseDown, false );
-				element.addEventListener( 'mouseup', onElementMouseUp, false );
-				element.addEventListener( 'click', onElementClick, false );
-
-				elements[i] = element;
-
-				resultBodies.push( bodies[i] = createBox( world, properties[i][0] + ( properties[i][2] >> 1 ), properties[i][1] + ( properties[i][3] >> 1 ), properties[i][2] / 2, properties[i][3] / 2, false, element ) );
-
-			}
-
-			function addImage( data ) {
-
-				var element = document.createElement( 'img' );
-				element.style.display = 'none';
-				element.style.cursor = 'pointer';
-				element.addEventListener( 'load', function () {
-
-					properties.push( [ Math.random() * ( window.innerWidth / 2 ), - 200, element.width, element.height ] );
-
-					var i = properties.length - 1;
-
-					element.style.display = 'block';
-					element.style.position = 'absolute';
-					element.style.left = 0 + 'px';
-					element.style.top = - 200 + 'px';
-					element.style.backgroundColor = '#ffffff';
-					element.addEventListener( 'mousedown', onElementMouseDown, false );
-					element.addEventListener( 'mouseup', onElementMouseUp, false );
-					element.addEventListener( 'click', onElementClick, false );
-					element.addEventListener( 'click', function ( event ) {
-
-						var range = 5;
-
-						if ( mouseOnClick[0] < event.clientX + range && mouseOnClick[0] > event.clientX - range &&
-						     mouseOnClick[1] < event.clientY + range && mouseOnClick[1] > event.clientY - range ) {
-
-							window.open( data.unescapedUrl );
-
-						}
-
-					}, false );
-
-					elements[i] = element;
-
-					resultBodies.push( bodies[i] = createBox( world, properties[i][0] + ( properties[i][2] >> 1 ), properties[i][1] + ( properties[i][3] >> 1 ), properties[i][2] / 2, properties[i][3] / 2, false, element ) );
-
-				}, false );
-				element.src = data.tbUrl;
-				document.body.appendChild( element );
-
-			}
-			*/
-
-//
 
 var prevTime;
 

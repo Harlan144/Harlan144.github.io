@@ -52,6 +52,7 @@ $(window).bind('load', function () {
         canvas2;
 
     c.width = $('#c-container').outerWidth();
+    console.log(c.width);
     c.height = $('#c-container').outerHeight();
 
     c2.width = $('#c2-container').outerWidth();
@@ -172,7 +173,6 @@ $(window).bind('load', function () {
 
     $(window).resize(function initial() {
         window.addEventListener('mousemove', app.cursorEvents, false);
-        window.addEventListener('touchmove', app.cursorEvents, false);
 
         c.width = $('#c-container').outerWidth();
         c.height = $('#c-container').outerHeight();

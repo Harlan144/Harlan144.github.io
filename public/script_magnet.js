@@ -10,7 +10,7 @@ var sketch = Sketch.create(),
     // delta time for speed regulation
     dt = 1,
 
-    maxCoins= 750,
+    maxCoins= 500,
     // the coin object collection
     coins = [];
     
@@ -160,7 +160,6 @@ Coin.prototype = {
 // create a coin every 50 milliseconds
 setInterval(function(){
   // the settings passed place it randomly and give the coin a random value
-  console.log(coins.length);
   if (coins.length<maxCoins){
     coins.push( new Coin( random( 0, sketch.width ), random( 0, sketch.height )));
 

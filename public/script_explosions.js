@@ -1,4 +1,4 @@
-var c = document.getElementById("canvas");
+var c = document.getElementById("canvas_explode");
 var ctx = c.getContext("2d");
 var cH;
 var cW;
@@ -34,7 +34,7 @@ function calcPageFillRadius(x, y) {
 }
 
 function addClickListeners() {
-  //document.addEventListener("touchstart", handleEvent);
+  document.addEventListener("touchstart", handleEvent);
   document.addEventListener("mousedown", handleEvent);
 };
 
@@ -156,8 +156,9 @@ var animate = anime({
 });
 
 var resizeCanvas = function() {
-  cW = window.innerWidth;
-  cH = window.innerHeight;
+  cW = document.body.scrollWidth; //window.innerWidth;
+  cH =  document.getElementById("pubs").offsetHeight+window.innerHeight*0.6;  //document.body.scrollHeight; //window.innerHeight;
+  console.log(document.body.scrollHeight);
   c.width = cW * devicePixelRatio;
   c.height = cH * devicePixelRatio;
   ctx.scale(devicePixelRatio, devicePixelRatio);
@@ -186,11 +187,11 @@ function handleInactiveUser() {
   function clearInactiveTimeout() {
     clearTimeout(inactive);
     document.removeEventListener("mousedown", clearInactiveTimeout);
-    //document.removeEventListener("touchstart", clearInactiveTimeout);
+    document.removeEventListener("touchstart", clearInactiveTimeout);
   }
   
   document.addEventListener("mousedown", clearInactiveTimeout);
-  //document.addEventListener("touchstart", clearInactiveTimeout);
+  document.addEventListener("touchstart", clearInactiveTimeout);
 }
 
 function startFauxClicking() {

@@ -1,10 +1,18 @@
-var canvas = document.getElementById('canvas');
-canvas.width = canvas.clientWidth;
-canvas.height = canvas.clientHeight;
+var canvas = document.getElementById('canvas_bubbles');
+
+var body = document.body;
+var html = document.documentElement;
+
+var bodyWidth = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
+var bodyHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+
+canvas.width = bodyWidth//canvas.clientWidth;
+canvas.height = bodyHeight //canvas.clientHeight;
 var ctx = canvas.getContext('2d');
 var count = canvas.height;
 var bubbles = [];
-var bubbleCount = 20;
+var bubbleCount = 30;
 var bubbleSpeed = 1;
 var popLines = 6;
 var popDistance = 60;
@@ -12,7 +20,7 @@ var mouseOffset = {
     x: 0,
     y: 0
 }
-var clumsyFingerOffset = 1.5 //extra space around bubble where still popped
+
 
 
 // --------------
@@ -56,8 +64,8 @@ function animate() {
     // ---------------
 
     for (var i = 0; i < bubbles.length; i++) {
-        if (mouseOffset.x > bubbles[i].position.x - bubbles[i].radius*clumsyFingerOffset && mouseOffset.x < bubbles[i].position.x + bubbles[i].radius*clumsyFingerOffset) {
-            if (mouseOffset.y > bubbles[i].position.y - bubbles[i].radius*clumsyFingerOffset && mouseOffset.y < bubbles[i].position.y + bubbles[i].radius*clumsyFingerOffset) {
+        if (mouseOffset.x > bubbles[i].position.x - bubbles[i].radius && mouseOffset.x < bubbles[i].position.x + bubbles[i].radius) {
+            if (mouseOffset.y > bubbles[i].position.y - bubbles[i].radius && mouseOffset.y < bubbles[i].position.y + bubbles[i].radius) {
                 for (var a = 0; a < bubbles[i].lines.length; a++) {
                     popDistance = bubbles[i].radius * 0.5;
                     bubbles[i].lines[a].popping = true;
@@ -80,12 +88,12 @@ window.requestAnimationFrame(animate);
 
 var createBubble = function () {
     this.position = { x: 0, y: 0 };
-    this.radius = 10 + Math.random() * 8;
+    this.radius = 8 + Math.random() * 6;
     this.xOff = Math.random() * canvas.width - this.radius;
     this.yOff = Math.random() * canvas.height;
     this.distanceBetweenWaves = 50 + Math.random() * 40;
     this.count = canvas.height + this.yOff;
-    this.color = '#a6d7eb';
+    this.color = '#8bc9ee';
     this.lines = [];
     this.popping = false;
     this.maxRotation = 85;
@@ -133,8 +141,8 @@ var createBubble = function () {
 
         if (!this.popping) {
             ctx.beginPath();
-            ctx.strokeStyle = '#a6d7eb';
-            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#8bc9ee';
+            ctx.lineWidth = 1;
             ctx.arc(0, 0, this.radius - 3, 0, Math.PI * 1.5, true);
             ctx.stroke();
 
@@ -149,7 +157,7 @@ var createBubble = function () {
         for (var a = 0; a < this.lines.length; a++) {
             if (this.lines[a].popping) {
                 if (this.lines[a].lineLength < popDistance && !this.lines[a].inversePop) {
-                    this.lines[a].popDistance += 0.10;
+                    this.lines[a].popDistance += 0.06;
                 } else {
                     if (this.lines[a].popDistance >= 0) {
                         this.lines[a].inversePop = true;
@@ -215,7 +223,7 @@ function createLine() {
         this.updateValues();
 
         ctx.beginPath();
-        ctx.strokeStyle = '#E5F3FD';
+        ctx.strokeStyle = '#8bc9ee';
         ctx.lineWidth = 2;
         ctx.moveTo(this.x, this.y);
         if (this.x < this.bubble.position.x) {
@@ -243,21 +251,15 @@ function createLine() {
 
 canvas.addEventListener('mousemove', mouseMove);
 
-canvas.addEventListener('mouseclick', mouseClick);
-
 function mouseMove(e) {
     e.preventDefault();
     mouseOffset.x = e.offsetX;
     mouseOffset.y = e.offsetY;
 }
 
-function mouseClick(e) {
-    mouseOffset.x = e.offsetX;
-    mouseOffset.y = e.offsetY;
-}
-
-
 window.addEventListener('resize', function () {
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
+    var bodyWidth = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
+    var bodyHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    canvas.width = bodyWidth; //canvas.clientWidth;
+    canvas.height = bodyHeight; //canvas.clientHeight;
 });
