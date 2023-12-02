@@ -160,8 +160,8 @@ var animate = anime({
 
 var resizeCanvas = function() {
   cW = document.body.scrollWidth; //window.innerWidth;
-  cH =  document.getElementById("pubs").offsetHeight+window.innerHeight*0.6;  //document.body.scrollHeight; //window.innerHeight;
-  console.log(document.body.scrollHeight);
+  cH =  1000; //document.getElementById("pubs").offsetHeight+window.innerHeight*0.6;  //document.body.scrollHeight; //window.innerHeight;
+  console.log(cH);
   c.width = cW * devicePixelRatio;
   c.height = cH * devicePixelRatio;
   ctx.scale(devicePixelRatio, devicePixelRatio);
