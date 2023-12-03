@@ -61,7 +61,6 @@ body {
     transform: translate(-50%, -50%);
 
 }
-
 #aboutpagehero_container{
     pointer-events: none;
     margin:auto;
@@ -345,7 +344,7 @@ a {
     text-decoration: none;
   }
 
-.fa-github, .fa-linkedin{
+.fa-github, .fa-linkedin, .fa-facebook{
     background:white;
     color: black;
     border-radius: 40%;
