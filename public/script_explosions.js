@@ -118,7 +118,7 @@ function addClickListeners() {
 
 function handleEvent(e) {
   if (e.touches) {
-    e.preventDefault();
+    // e.preventDefault();
     e = e.touches[0];
   }
 
@@ -129,11 +129,11 @@ function handleEvent(e) {
   var targetElement = document.elementFromPoint(e.clientX, e.clientY);
 
   // Trigger the click event on the target element
-  if (targetElement) {
-    var clickEvent = new MouseEvent('click', { bubbles: true });
-    targetElement.dispatchEvent(clickEvent);
-  }
-  
+  // if (targetElement) {
+  //   var clickEvent = new MouseEvent('click', { bubbles: true });
+  //   targetElement.dispatchEvent(clickEvent);
+  // }
+
   var currentColor = colorPicker.current();
   var nextColor = colorPicker.next();
   var targetR = calcPageFillRadius(offsetX, offsetY);
