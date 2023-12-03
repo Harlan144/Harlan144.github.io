@@ -1451,10 +1451,10 @@ function trigGrav(){
     const mobile_nav = document.querySelector(".mobile_nav");
     const links_tab = document.querySelector(".links_tab");
     const link_portfolio = document.querySelector(".link_portfolio");
-    const homepage_text = document.getElementById("homepagehero_container");
+    // const homepage_text = document.getElementById("homepagehero_container");
     const bottom_pin = document.getElementById("pinToBottom");
 
-    const grav_list = [nav, mobile_nav,links_tab,link_portfolio,homepage_text, bottom_pin];
+    const grav_list = [nav, mobile_nav,links_tab,link_portfolio, bottom_pin];
     if (!triggered) {
         for (let i = 0; i < grav_list.length; i++) {
             grav_list[i].classList.add("box2d");
